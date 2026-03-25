@@ -1,13 +1,10 @@
 import sys
-
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
-
 from src.rag.pipeline import RAGPipeline
 
 console = Console()
-
 
 def cmd_ingest(pipeline: RAGPipeline):
     console.print("\n[bold]Ingesting documents...[/bold]")

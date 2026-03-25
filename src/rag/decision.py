@@ -1,8 +1,6 @@
 from enum import Enum
-
 from . import config
 from .auditor import AuditResult
-
 
 class Decision(Enum):
     ACCEPT = "ACCEPT"

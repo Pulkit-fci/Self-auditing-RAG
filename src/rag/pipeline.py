@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-
 from .auditor import AuditResult, Auditor
 from .decision import Decision, decide
 from .embedder import Embedder

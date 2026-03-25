@@ -1,5 +1,4 @@
 from openai import OpenAI
-
 from . import config
 
 _SYSTEM_PROMPT = (
@@ -7,7 +6,6 @@ _SYSTEM_PROMPT = (
     "provided context. If the context does not contain enough information to "
     "answer, say so. Do not use any outside knowledge."
 )
-
 
 class Generator:
     def __init__(self):

@@ -1,8 +1,6 @@
 import numpy as np
 from sentence_transformers import SentenceTransformer
-
 from . import config
-
 
 class Embedder:
     def __init__(self):
