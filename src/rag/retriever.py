@@ -1,9 +1,8 @@
 import json
 from pathlib import Path
-
 import faiss
+import fitz
 import numpy as np
-
 from . import config
 from .embedder import Embedder
 
@@ -16,6 +15,13 @@ def _chunk_text(text: str, size: int, overlap: int) -> list[str]:
         chunks.append(text[start:end])
         start += size - overlap
     return chunks
+
+
+def _read_pdf(filepath: Path) -> str:
+    doc = fitz.open(filepath)
+    text = "\n".join(page.get_text() for page in doc)
+    doc.close()
+    return text
 
 
 class Retriever:
@@ -31,10 +37,12 @@ class Retriever:
         texts: list[str] = []
         for filepath in sorted(docs_dir.glob("*.txt")):
             texts.append(filepath.read_text(encoding="utf-8"))
+        for filepath in sorted(docs_dir.glob("*.pdf")):
+            texts.append(_read_pdf(filepath))
 
         if not texts:
             raise FileNotFoundError(
-                f"No .txt files found in {docs_dir}. "
+                f"No .txt or .pdf files found in {docs_dir}. "
                 "Add documents and try again."
             )
 
